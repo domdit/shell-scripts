@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ -z "$*" ]]
+then
+	echo "You must enter the name of the python script you want to create!"
+	echo -e "Please enter the script name: "
+	read scriptName
+else
+	scriptName=$1
+fi
+
+script=~/bin/$scriptName
+touch $script
+echo "#!/usr/bin/env python3" >> $script
+chmod 777 $script
+nano $script
+

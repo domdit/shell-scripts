@@ -1,0 +1,32 @@
+#!/bin/bash
+
+pyc=/mnt/c/Users/domdi/PycharmProjects
+
+echo "Please enter application directory name"
+read dir
+echo "Please enter app name"
+read app
+echo "What would you like your index to say?"
+read hello
+
+mkdir -p $pyc/$dir/$app
+touch $pyc/$dir/run.py
+mkdir $pyc/$dir/$app/static
+touch $pyc/$dir/$app/static/main.css
+mkdir $pyc/$dir/$app/templates
+touch $pyc/$dir/$app/templates/index.html
+
+echo -e "from $app import app\n\nif __name__ == '__main__':\n\tapp.run()" >> $pyc/$dir/run.py
+
+touch $pyc/$dir/$app/__init__.py
+
+echo -e "from flask import Flask\nimport os\n\n\napp = Flask(__name__)\n\napp.config['SECRET_KEY'] = os.getenv('SECRET_KEY')\n\nfrom $app import routes" >> $pyc/$dir/$app/__init__.py
+
+touch $pyc/$dir/$app/routes.py
+
+echo -e "from $app import app\nfrom flask import render_template\n\n\n@app.route(\"/\")\ndef index():\n\treturn render_template('index.html')" >> $pyc/$dir/$app/routes.py
+
+echo -e "<h1>$hello</h1>" >> $pyc/$dir/$app/templates/index.html
+
+
+
