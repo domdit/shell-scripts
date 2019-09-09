@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ -z "$*" ]]
+then
+        echo "You must enter the name of the bash script you want to create!"
+        echo -e "Please enter the script name: "
+        read scriptName
+else
+        scriptName=$1
+fi
+
+script=~/bin/$scriptName
+touch $script
+echo "#!/bin/bash" >> $script
+chmod 777 $script
+nano $script

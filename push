@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ -z "$*" ]]
+then
+	echo "Enter commit message now"
+	read commitMessage
+else
+	commitMessage=$1
+fi
+
+git add -A
+git commit -m "$commitMessage"
+git push origin master
